@@ -5,7 +5,6 @@ import { Dimensions } from 'react-native';
 import axios from 'axios';
 import Button from "../Components/Button.js"
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
-import Bot from "./Bot";
 export const UserContext = React.createContext();
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -64,7 +63,7 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
     texto: {
-      marginTop: 10,
+      marginTop: 30,
       color: '#F72323'
     },
   });

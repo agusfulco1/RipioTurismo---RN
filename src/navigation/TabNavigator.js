@@ -17,16 +17,17 @@ export default function TabNavigator({route}) {
                 let rn = route.name;
 
                 if (rn === homeName) {
-                    iconName = focused ? 'home-outline' : 'home';
+                    iconName = focused ? 'home' : 'home-outline';
 
                 } else if (rn === chatName) {
-                    iconName = focused ? 'chatbox-outline' : 'chatbox';
+                    iconName = focused ? 'chatbox' : 'chatbox-outline';
 
                 } 
                 // You can return any component that you like here!
                 return <Ionicons name={iconName} size={size} color={color} />;
                 },
-            })}
+                headerShown: false
+            }) }
             tabBarOptions={{
                 activeTintColor: 'orange',
                 inactiveTintColor: 'orange',

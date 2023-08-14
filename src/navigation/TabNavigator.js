@@ -11,7 +11,7 @@ export default function TabNavigator({route}) {
     console.log(NumPasaporte)
     return (
         <Tab.Navigator
-            screenOptions={({ route }) => ({
+            screenOptions={({ route}) => ({
                 tabBarIcon: ({ focused, color, size }) => {
                 let iconName;
                 let rn = route.name;
@@ -33,8 +33,8 @@ export default function TabNavigator({route}) {
                 labelStyle: { paddingBottom: 10, fontSize: 10 },
                 style: { padding: 10, height: 70}
             }}>
-            <Tab.Screen initialParams={NumPasaporte} name={homeName} component={Itinerario} />
-            <Tab.Screen name={chatName} component={Bot} />
+            <Tab.Screen initialParams={{NumPasaporte}} name={homeName} component={Itinerario} />
+            <Tab.Screen initialParams={{NumPasaporte}} name={chatName} component={Bot} />
         </Tab.Navigator>
     );
 }

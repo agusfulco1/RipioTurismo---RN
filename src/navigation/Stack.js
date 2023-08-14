@@ -8,7 +8,7 @@ const Stack = createNativeStackNavigator()
 export default function StackNavigator() {
    
     return (
-      <Stack.Navigator >
+      <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="LoginScreen" component={Login} />
         <Stack.Screen name="mose" component={TabNavigator} />
       </Stack.Navigator>

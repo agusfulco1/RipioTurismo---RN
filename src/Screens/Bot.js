@@ -1,20 +1,28 @@
 import React from 'react';
 import {View, StyleSheet, TextInput, Text} from 'react-native';
 import axios from 'axios';
-import {UserContext} from "./Login"
+import {
+  useFonts, 
+  Montserrat_300Light } from "@expo-google-fonts/montserrat"
 
-const Bot = () => {
-  const value = React.useContext(UserContext);  
+const TextInputExample = ({route}) => {
+  let [fontsLoaded] = useFonts({
+    Montserrat_300Light,
+  })
+  const {NumPasaporte} = route.params
   const [number, setNumber] = React.useState('');
   const [vuelos, setVuelos] = React.useState('');
+  const [hoteles, setHoteles] = React.useState('');
+  const [text, setText] = React.useState('');
   const [loading, setLoading] = React.useState(false)
+  const [loading2, setLoading2] = React.useState(false)
   const substr = 'flight';
+  const substr2 = 'hotel';
   
   React.useEffect( () => {
-    console.log(value)
     console.log(number.includes(substr));
     if(number.toLowerCase().includes(substr.toLowerCase())){
-    axios.get("http://localhost:3000/vuelos/" + value)
+    axios.get("http://localhost:3000/vuelos/" + NumPasaporte)
     .then(function (response) {
       setVuelos(response.data)
     })
@@ -22,17 +30,27 @@ const Bot = () => {
     }
   }, [number])
 
+  React.useEffect( () => {
+    if(text.toLowerCase().includes(substr2.toLowerCase())){
+    axios.get("http://localhost:3000/hotels/" + NumPasaporte)
+    .then(function (response) {
+      setHoteles(response.data)
+    })
+    .finally(() => setLoading2(true))
+    }
+  }, [text])
+
 
   return (
-    <UserContext.Consumer>
-      <View style={[styles.container,]}>
+    <View style={[styles.container, ]}>
+      {!fontsLoaded ? null : (
         <View style={[styles.box, styles.shadowProp]}>
           <Text style={styles.text2}>Ask for your flight</Text>
           <TextInput
-            style={styles.input}
-            onChangeText={setNumber}
-            value={number} />
-
+                  style={styles.input}
+                  onChangeText={setNumber}
+                  value={number}
+          />
           {!loading ? (
             <Text style={styles.text}>Loading...</Text>
           ) : (
@@ -44,16 +62,37 @@ const Bot = () => {
                 </View>
               )
             })
-
-          )}
+          )} 
         </View>
-
-
-      </View>
-    </UserContext.Consumer>
-    
+      )}
+        {!fontsLoaded ? null : (
+          <View style={[styles.box, styles.shadowProp]}>
+            <Text style={styles.text2}>Ask for your hotel</Text>
+            <TextInput
+                    style={styles.input}
+                    onChangeText={setText}
+                    value={text}
+            />
+            {!loading2 ? (
+              <Text style={styles.text}>Loading...</Text>
+            ) : (
+              hoteles.map((obj) => {
+                return (
+                  <View key={obj.idHotel}>
+                    <Text>{obj.Nombre}</Text>
+                    <Text>{obj.Ubicacion}</Text>
+                    <Text>{obj.Rating}</Text>
+                    <Text>{obj.Descripcion}</Text>
+                  </View>
+                )
+              })
+            )} 
+          </View>
+        )}
+    </View>
     );
   }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -69,8 +108,9 @@ const styles = StyleSheet.create({
     padding: 10,
     opacity: 0.5,
     marginTop: 50,
-  },
-  text: {
+    borderRadius: 13,
+    alignItems: 'center',
+  },  text: {
     height: 40,
     padding: 10,
     color: 'black',
@@ -79,12 +119,14 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontWeight: 'bold',
     color: 'black',
+    fontFamily: "Montserrat_300Light"
   },
   box: {
     padding: 10,
     backgroundColor: 'white',
     height: 400,
-    borderRadius: 13,
+    borderRadius: 8,
+      
   
   },
   shadowProp: {
@@ -103,5 +145,4 @@ const styles = StyleSheet.create({
   
 });
 
-export default Bot;
-
+export default TextInputExample;

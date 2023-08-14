@@ -39,7 +39,6 @@ export default function Itinerario({route}) {
                   <Separator></Separator>  
                 </View>
               </View>
-             
             );
             
           })

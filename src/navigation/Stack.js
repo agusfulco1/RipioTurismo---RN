@@ -1,7 +1,5 @@
-import Bot from '../Screens/Bot'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from "../Screens/Login"
-import Itinerario from '../Screens/Itinerario'
 import TabNavigator from './TabNavigator'
 import Detalle from '../Screens/Detalle'
 const Stack = createNativeStackNavigator()

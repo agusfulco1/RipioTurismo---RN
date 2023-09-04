@@ -16,6 +16,7 @@ export default function Login(props) {
     const [NumPasaporte, setNumPasaporte] = React.useState("")
     const [isLoading, setLoading] = React.useState(true)
     const onPress = () => {
+      setLoading(true)
       setValidation(false);
       axios.get("http://localhost:3000/users")
       .then(function (response) {
@@ -34,15 +35,17 @@ export default function Login(props) {
     }
     React.useEffect( () => {
       if (validation) {
-        setLoading(true)
+        setLoading(false)
         props.navigation.navigate('mose', {NumPasaporte: NumPasaporte})
+      }
+      else {
       }
     }, [isLoading])
     return (
       <View style={styles.container}>
         <Input nombreLabel="Nombre Completo" text={textName} setText={onChangeTextName}></Input>
         <Input nombreLabel="N° Pasaporte" text={textNumber} setText={onChangeTextNumber}></Input>
-        { isLoading ? null : !validation ? <Text style={styles.texto}><MaterialCommunityIcons name="alert" size={24} color="red" />Error, el nombre o el numero de pasaporte no coinciden.</Text> :   null      /*<UserContext.Provider value={value}><Bot /></UserContext.Provider>*/}
+        { isLoading ? null : !validation ? <Text style={styles.texto}><MaterialCommunityIcons name="alert" size={24} color="red" />Error, el nombre o el numero de pasaporte no coinciden.</Text> : null /*<UserContext.Provider value={value}><Bot /></UserContext.Provider>*/}
         <Button
           style={styles.boton}
           title='Iniciar Sesion'

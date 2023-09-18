@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { View, StyleSheet, TextInput, Text } from 'react-native';
+import { View, StyleSheet, TextInput, Text, ScrollView } from 'react-native';
 import axios from 'axios';
 import {
   useFonts,
@@ -15,7 +15,7 @@ const TextInputExample = ({ route }) => {
   let [fontsLoaded] = useFonts({
     Montserrat_300Light,
   })
-  
+
 
   const NumPasaporte = useContext(UserContext)
 
@@ -35,9 +35,9 @@ const TextInputExample = ({ route }) => {
 
   useEffect(() => {
     axios.get('http://localhost:3000/ciudad/' + NumPasaporte)
-    .then(response => {
-      setCiudad(response.data)
-    })
+      .then(response => {
+        setCiudad(response.data)
+      })
   }, [])
 
   React.useEffect(() => {
@@ -68,18 +68,22 @@ const TextInputExample = ({ route }) => {
           access_key: params.access_key,
           query: element.Nombre
         }
-        console.log(params2)
-        console.log('http://api.weatherstack.com/current', {params2})
-        axios.get('http://api.weatherstack.com/current' + params2)
-        .then(response => {
-          console.log(response.data)
-          const apiResponse = response.data;
-          console.log(`Current temperature in ${apiResponse.location.name} is ${apiResponse.current.temperature}℃`);
-        }).catch(error => {
-          console.log(error);
-        }).finally(() => setLoading2(true))
+        console.log('http://api.weatherstack.com/current', { params2 })
+        axios.get('http://api.weatherstack.com/current', {
+          params: {
+            access_key: params.access_key,
+            query: element.Nombre
+          }
+        })
+          .then(response => {
+            console.log(response.data)
+            const apiResponse = response.data;
+            console.log(`Current temperature in ${apiResponse.location.name} is ${apiResponse.current.temperature}℃`);
+          }).catch(error => {
+            console.log(error);
+          }).finally(() => setLoading2(true))
       });
-      
+
     }
   }, [text2, params])
 
@@ -89,79 +93,74 @@ const TextInputExample = ({ route }) => {
       query: ciudad
     })
   }, [ciudad])
-    
-  return (
-    <View style={[styles.container,]}>
-      {!fontsLoaded ? null : (
-        <View style={[styles.box, styles.shadowProp]}>
-          <Text style={styles.text2}>Ask for your flight</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={setNumber}
-            value={number}
-          />
-          {!loading ? (
-            <Text style={styles.text}>Loading...</Text>
-          ) : (
-            vuelos.map((obj) => {
-              return (
-                <View key={obj.idVuelo}>
-                  <Text>{obj.codigoVuelo}</Text>
-                  <Text>{obj.aerolinea}</Text>
-                </View>
-              )
-            })
-          )}
-        </View>
-      )}
-      {!fontsLoaded ? null : (
-        <View style={[styles.box, styles.shadowProp]}>
-          <Text style={styles.text2}>Ask for your hotel</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={setText}
-            value={text}
-          />
-          {!loading2 ? (
-            <Text style={styles.text}>Loading...</Text>
-          ) : (
-            hoteles.map((obj) => {
-              return (
-                <View key={obj.idHotel}>
-                  <Text>{obj.Nombre}</Text>
-                  <Text>{obj.Ubicacion}</Text>
-                  <Text>{obj.Rating}</Text>
-                  <Text>{obj.Descripcion}</Text>
-                </View>
-              )
-            })
-          )}
-        </View>
 
-      )}
-      {!fontsLoaded ? null : (
-        <View style={[styles.box, styles.shadowProp]}>
-          <Text style={styles.text2}>Ask for the local temperature</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={setText2}
-            value={text2}
-          />
-          {!loading ? (
-            <Text style={styles.text}>Loading...</Text>
-          ) : (
-            vuelos.map((obj) => {
-              return (
-                <View key={obj.idVuelo}>
-                  <Text>{obj.codigoVuelo}</Text>
-                  <Text>{obj.aerolinea}</Text>
-                </View>
-              )
-            })
-          )}
-        </View>
-      )}
-    </View>
+  return (
+
+    <ScrollView>
+      <View style={styles.container}>
+        {!fontsLoaded ? null : (
+          <View style={[styles.box, styles.shadowProp]}>
+            <Text style={styles.text2}>Ask for your flight</Text>
+            <TextInput
+              style={styles.input}
+              onChangeText={setNumber}
+              value={number}
+            />
+            {!loading ? (
+              <Text style={styles.text}>Loading...</Text>
+            ) : (
+              vuelos.map((obj) => {
+                return (
+                  <View key={obj.idVuelo}>
+                    <Text>Vuelo llegada</Text>
+                    <Text>Codigo Vuelo: {obj.codigoVuelo}</Text>
+                    <Text>Aerolinea: {obj.aerolinea}</Text>
+                  </View>
+                )
+              })
+            )}
+          </View>
+        )}
+        {!fontsLoaded ? null : (
+          <View style={[styles.box, styles.shadowProp]}>
+            <Text style={styles.text2}>Ask for your hotel</Text>
+            <TextInput
+              style={styles.input}
+              onChangeText={setText}
+              value={text}
+            />
+            {!loading2 ? (
+              <Text style={styles.text}>Loading...</Text>
+            ) : (
+              hoteles.map((obj) => {
+                return (
+                  <View key={obj.idHotel}>
+                    <Text>{obj.Nombre}</Text>
+                    <Text>{obj.Ubicacion}</Text>
+                    <Text>{obj.Rating}</Text>
+                    <Text>{obj.Descripcion}</Text>
+                  </View>
+                )
+              })
+            )}
+          </View>
+
+        )}
+        {!fontsLoaded ? null : (
+          <View style={[styles.box, styles.shadowProp]}>
+            <Text style={styles.text2}>Ask the temperature</Text>
+            <TextInput
+              style={styles.input}
+              onChangeText={setText2}
+              value={text2}
+            />
+          </View>
+        )}
+      </View>
+
+    </ScrollView>
+
+
   );
 }
 
@@ -197,8 +196,10 @@ const styles = StyleSheet.create({
   box: {
     padding: 10,
     backgroundColor: 'white',
-    height: 200,
+    height: 300,
+    width: 400,
     borderRadius: 8,
+    marginTop: 20,
   },
   shadowProp: {
     shadowColor: 'black',

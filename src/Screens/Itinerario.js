@@ -11,6 +11,7 @@ const windowHeight = Dimensions.get('window').height;
 export default function Itinerario({ navigation }) {
   const [actividades, setActividades] = React.useState()
   const [loading, setLoading] = React.useState(false)
+  
   const NumPasaporte = useContext(UserContext)
 
   React.useEffect(() => {

@@ -27,7 +27,7 @@ export default function Login(props) {
     }
     const validar = usuariosArr => {
         usuariosArr.forEach(element => {
-          if (element.NombreCompleto === textName && element.NumPasaporte === textNumber ) {
+          if (element.NumPasaporte === textName && element.Contraseña === textNumber ) {
             setValidation(true)
             setNumPasaporte(element.NumPasaporte)
           }
@@ -36,6 +36,8 @@ export default function Login(props) {
     React.useEffect( () => {
       if (validation) {
         setLoading(false)
+        onChangeTextName("")
+        onChangeTextNumber("")
         props.navigation.navigate('mose', {NumPasaporte: NumPasaporte})
       }
       else {
@@ -43,8 +45,8 @@ export default function Login(props) {
     }, [isLoading])
     return (
       <View style={styles.container}>
-        <Input nombreLabel="Nombre Completo" text={textName} setText={onChangeTextName}></Input>
-        <Input nombreLabel="N° Pasaporte" text={textNumber} setText={onChangeTextNumber}></Input>
+        <Input nombreLabel="N° Pasaporte" text={textName} setText={onChangeTextName}></Input>
+        <Input nombreLabel="Contraseña" text={textNumber} setText={onChangeTextNumber}></Input>
         { isLoading ? null : !validation ? <Text style={styles.texto}><MaterialCommunityIcons name="alert" size={24} color="red" />Error, el nombre o el numero de pasaporte no coinciden.</Text> : null /*<UserContext.Provider value={value}><Bot /></UserContext.Provider>*/}
         <Button
           style={styles.boton}

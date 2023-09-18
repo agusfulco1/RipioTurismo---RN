@@ -1,17 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useContext,useEffect } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 import Separator from '../Components/Separator'
 import { Dimensions } from 'react-native';
-
+import { UserContext } from '../Context/UserContext';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-export default function Itinerario({ route, navigation }) {
+export default function Itinerario({ navigation }) {
   const [actividades, setActividades] = React.useState()
   const [loading, setLoading] = React.useState(false)
-  const { NumPasaporte } = route.params
+  const NumPasaporte = useContext(UserContext)
 
   React.useEffect(() => {
     axios.get('http://localhost:3000/activities/' + NumPasaporte)

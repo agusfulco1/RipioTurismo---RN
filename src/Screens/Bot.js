@@ -41,14 +41,22 @@ const TextInputExample = ({ route }) => {
   }, [])
 
   React.useEffect(() => {
-    console.log(number.includes(substr));
-    if (number.toLowerCase().includes(substr.toLowerCase())) {
+    let word = number.toLowerCase();
+    switch (word) {
+      case substr.toLowerCase():
+        console.log("messi")
+        break;
+    
+      default:
+        break;
+    }
+    /*if (number.toLowerCase().includes(substr.toLowerCase())) {
       axios.get("http://localhost:3000/vuelos/" + NumPasaporte)
         .then(function (response) {
           setVuelos(response.data)
         })
         .finally(() => setLoading(true))
-    }
+    }*/
   }, [number])
 
   React.useEffect(() => {

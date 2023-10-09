@@ -7,7 +7,6 @@ import {
 } from "@expo-google-fonts/montserrat"
 import { UserContext } from '../Context/UserContext';
 import { Dimensions } from 'react-native';
-import { GiftedChat } from 'react-native-gifted-chat';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -16,7 +15,6 @@ const TextInputExample = ({ route }) => {
   let [fontsLoaded] = useFonts({
     Montserrat_300Light,
   })
-
 
   const NumPasaporte = useContext(UserContext)
 
@@ -30,6 +28,7 @@ const TextInputExample = ({ route }) => {
   const [loading3, setLoading3] = React.useState(false)
   const [ciudad, setCiudad] = React.useState()
   const [params, setParams] = React.useState()
+
   const substr = 'flight';
   const substr2 = 'hotel';
   const substr3 = 'temperature';
@@ -90,11 +89,10 @@ const TextInputExample = ({ route }) => {
 
   return (
     <ScrollView>
-      
       <View style={styles.container}>
         {!fontsLoaded ? null : (
           <View style={[styles.box, styles.shadowProp]}>
-            <Text style={styles.text2}>Ask for your flight</Text>
+            <Text style={styles.text2}>Ask whatever you want</Text>
             <TextInput
               style={styles.input}
               onChangeText={setNumber}
@@ -115,43 +113,7 @@ const TextInputExample = ({ route }) => {
             )}
           </View>
         )}
-        {!fontsLoaded ? null : (
-          <View style={[styles.box, styles.shadowProp]}>
-            <Text style={styles.text2}>Ask for your hotel</Text>
-            <TextInput
-              style={styles.input}
-              onChangeText={setText}
-              value={text}
-            />
-            {!loading2 ? (
-              <Text style={styles.text}>Loading...</Text>
-            ) : (
-              hoteles.map((obj) => {
-                return (
-                  <View key={obj.idHotel}>
-                    <Text>{obj.Nombre}</Text>
-                    <Text>{obj.Ubicacion}</Text>
-                    <Text>{obj.Rating}</Text>
-                    <Text>{obj.Descripcion}</Text>
-                  </View>
-                )
-              })
-            )}
-          </View>
-
-        )}
-        {!fontsLoaded ? null : (
-          <View style={[styles.box, styles.shadowProp]}>
-            <Text style={styles.text2}>Ask the temperature</Text>
-            <TextInput
-              style={styles.input}
-              onChangeText={setText2}
-              value={text2}
-            />
-          </View>
-        )}
       </View>
-
     </ScrollView>
 
 

@@ -7,6 +7,7 @@ import {
 } from "@expo-google-fonts/montserrat"
 import { UserContext } from '../Context/UserContext';
 import { Dimensions } from 'react-native';
+import { GiftedChat } from 'react-native-gifted-chat';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -42,35 +43,21 @@ const TextInputExample = ({ route }) => {
 
   React.useEffect(() => {
     let word = number.toLowerCase();
-    switch (word) {
-      case substr.toLowerCase():
-        console.log("messi")
-        break;
-    
-      default:
-        break;
-    }
-    /*if (number.toLowerCase().includes(substr.toLowerCase())) {
+    if (word.includes(substr.toLowerCase())) {
       axios.get("http://localhost:3000/vuelos/" + NumPasaporte)
-        .then(function (response) {
-          setVuelos(response.data)
-        })
-        .finally(() => setLoading(true))
-    }*/
-  }, [number])
-
-  React.useEffect(() => {
-    if (text.toLowerCase().includes(substr2.toLowerCase())) {
-      axios.get("http://localhost:3000/hotels/" + NumPasaporte)
-        .then(function (response) {
-          setHoteles(response.data)
-        })
-        .finally(() => setLoading2(true))
+      .then(function (response) {
+        setVuelos(response.data)
+      })
+      .finally(() => setLoading(true))
     }
-  }, [text])
-
-  React.useEffect(() => {
-    if (text2.toLowerCase().includes(substr3.toLowerCase())) {
+    if (word.includes(substr2.toLowerCase())) {
+      axios.get("http://localhost:3000/hotels/" + NumPasaporte)
+      .then(function (response) {
+        setHoteles(response.data)
+      })
+      .finally(() => setLoading2(true))
+    }
+    if (word.includes(substr3.toLowerCase())) {
       params.query.forEach(element => {
         let params2 = {
           access_key: params.access_key,
@@ -91,9 +78,8 @@ const TextInputExample = ({ route }) => {
             console.log(error);
           }).finally(() => setLoading2(true))
       });
-
-    }
-  }, [text2, params])
+    }  
+  }, [number])
 
   useEffect(() => {
     setParams({
@@ -103,8 +89,8 @@ const TextInputExample = ({ route }) => {
   }, [ciudad])
 
   return (
-
     <ScrollView>
+      
       <View style={styles.container}>
         {!fontsLoaded ? null : (
           <View style={[styles.box, styles.shadowProp]}>

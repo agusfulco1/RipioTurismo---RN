@@ -28,17 +28,17 @@ export default function Button(props) {
         }).start();
     };
     return (
-        <View>
+        <View style={styles.container}>
             {!fontsLoaded ? (
-            <AppLoading/>
+                null
             
         ) : (
-            <View style={styles.container}>
-            <Animated.View style={[styles.button, {transform: [{scale}]}]}>
-                <TouchableOpacity onPress={props.onPress} onPressIn={onPressIn} onPressOut={onPressOut} style={styles.botonContainer}>
-                    <Text style={styles.textoBoton} adjustsFontSizeToFit={true}>{props.title}</Text>
-                </TouchableOpacity>
-            </Animated.View>
+            <View style={styles.botonContainer}>
+                <Animated.View style={[{transform: [{scale}]}]}>
+                    <TouchableOpacity onPress={props.onPress} onPressIn={onPressIn} onPressOut={onPressOut} style={styles.boton}>
+                        <Text style={styles.textoBoton} adjustsFontSizeToFit={true}>{props.title}</Text>
+                    </TouchableOpacity>
+                </Animated.View>
             </View>
             
         )} 
@@ -48,17 +48,16 @@ export default function Button(props) {
 }
 
 const styles = StyleSheet.create({
-    botonContainer: {
+    boton: {
         padding: 10,
         backgroundColor: "#1573FF",
         borderRadius: 50,
         padding: 10,
-        marginTop: 40,
         outlineColor: "#1573FF",
         outlineStyle: "solid",
         outlineWidth: 2,
         outlineOffset: 3,
-        width: 300,
+        width: "100%",
         justifyContent: "center",
         height: 60
     },
@@ -68,6 +67,14 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         textAlign: 'center',
         fontFamily: "Fredoka_300Light",
+    },
+    container: {
+        width: "70%",
+        alignItems: 'center',
+        marginTop: 60,
+    },
+    botonContainer: {
+        width: "30%",
     }
 })
 

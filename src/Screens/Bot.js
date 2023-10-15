@@ -7,6 +7,7 @@ import {
 } from "@expo-google-fonts/montserrat"
 import { UserContext } from '../Context/UserContext';
 import { Dimensions } from 'react-native';
+import react from 'react';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -18,14 +19,10 @@ const TextInputExample = ({ route }) => {
 
   const NumPasaporte = useContext(UserContext)
 
-  const [number, setNumber] = React.useState('');
+  const [texto, setTexto] = React.useState('');
+  const [apiResponse, setResponse] = React.useState()
   const [vuelos, setVuelos] = React.useState('');
-  const [hoteles, setHoteles] = React.useState('');
-  const [text, setText] = React.useState('');
-  const [text2, setText2] = React.useState('');
   const [loading, setLoading] = React.useState(false)
-  const [loading2, setLoading2] = React.useState(false)
-  const [loading3, setLoading3] = React.useState(false)
   const [ciudad, setCiudad] = React.useState()
   const [params, setParams] = React.useState()
 
@@ -41,20 +38,31 @@ const TextInputExample = ({ route }) => {
   }, [])
 
   React.useEffect(() => {
-    let word = number.toLowerCase();
+    setLoading(false)
+    let word = texto.toLowerCase();
     if (word.includes(substr.toLowerCase())) {
       axios.get("http://localhost:3000/vuelos/" + NumPasaporte)
-      .then(function (response) {
-        setVuelos(response.data)
-      })
-      .finally(() => setLoading(true))
+        .then(function (response) {
+          const vuelos = response.data
+          setResponse(vuelos.map((vuelo) => {
+            const respuesta = {
+              codigoVuelo: vuelo.codigoVuelo,
+              aerolinea: vuelo.aerolinea
+            }
+            return respuesta
+          }))
+        })
+        .finally(() => setLoading(true))
     }
     if (word.includes(substr2.toLowerCase())) {
       axios.get("http://localhost:3000/hotels/" + NumPasaporte)
-      .then(function (response) {
-        setHoteles(response.data)
-      })
-      .finally(() => setLoading2(true))
+        .then(function (response) {
+          const hoteles = response.data
+          setResponse(hoteles.map((hotel) => {
+            return hotel
+          }))
+        })
+        .finally(() => setLoading(true))
     }
     if (word.includes(substr3.toLowerCase())) {
       params.query.forEach(element => {
@@ -71,14 +79,13 @@ const TextInputExample = ({ route }) => {
         })
           .then(response => {
             console.log(response.data)
-            const apiResponse = response.data;
-            console.log(`Current temperature in ${apiResponse.location.name} is ${apiResponse.current.temperature}℃`);
+            setResponse(response.data)
           }).catch(error => {
             console.log(error);
-          }).finally(() => setLoading2(true))
+          }).finally(() => setLoading(true))
       });
-    }  
-  }, [number])
+    }
+  }, [texto])
 
   useEffect(() => {
     setParams({
@@ -88,34 +95,25 @@ const TextInputExample = ({ route }) => {
   }, [ciudad])
 
   return (
-    <ScrollView>
       <View style={styles.container}>
         {!fontsLoaded ? null : (
           <View style={[styles.box, styles.shadowProp]}>
             <Text style={styles.text2}>Ask whatever you want</Text>
             <TextInput
               style={styles.input}
-              onChangeText={setNumber}
-              value={number}
+              onChangeText={setTexto}
+              value={texto}
             />
             {!loading ? (
               <Text style={styles.text}>Loading...</Text>
             ) : (
-              vuelos.map((obj) => {
-                return (
-                  <View key={obj.idVuelo}>
-                    <Text>Vuelo llegada</Text>
-                    <Text>Codigo Vuelo: {obj.codigoVuelo}</Text>
-                    <Text>Aerolinea: {obj.aerolinea}</Text>
-                  </View>
-                )
-              })
+              <View>
+                <Text>{JSON.stringify(apiResponse)}</Text>
+              </View>
             )}
           </View>
         )}
       </View>
-    </ScrollView>
-
 
   );
 }

@@ -8,6 +8,9 @@ import {
 import { UserContext } from '../Context/UserContext';
 import { Dimensions } from 'react-native';
 import react from 'react';
+import Vuelo from '../Components/Vuelo'
+//import Hotel from '../Components/Hotel'
+//import Temperatura from '../Components/Temperatura'
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -20,7 +23,7 @@ const TextInputExample = ({ route }) => {
   const NumPasaporte = useContext(UserContext)
 
   const [texto, setTexto] = React.useState('');
-  const [apiResponse, setResponse] = React.useState([])
+  const [apiResponse, setResponse] = React.useState()
   const [loading, setLoading] = React.useState(false)
   const [ciudad, setCiudad] = React.useState()
   const [params, setParams] = React.useState()
@@ -82,14 +85,13 @@ const TextInputExample = ({ route }) => {
         })
           .then(response => {
             console.log(response.data)
-            responses.push({respuesta: `Current temperature in ${response.data.location.name} is ${response.data.current.temperature}℃`});
+            responses.push(`Current temperature in ${response.data.location.name} is ${response.data.current.temperature}℃`);
             setResponse(responses);
+            setTopic("temperatura")
           }).catch(error => {
             console.log(error);
           }).finally(() => setLoading(true))
       });
-
-
     }
   }, [texto])
 
@@ -117,7 +119,7 @@ const TextInputExample = ({ route }) => {
               <Text style={styles.text}>Loading...</Text>
             ) : (
               <View>
-                <Text>{JSON.stringify(apiResponse)}</Text>
+                {topic === "vuelo" ? <Vuelo vuelo={apiResponse}></Vuelo> : topic === "hotel" ? <Hotel hotel={apiResponse}></Hotel> : topic === "temperatura" ? <Temperatura temperatura={apiResponse}></Temperatura> : <Error /> }
               </View>
             )}
           </View>

@@ -20,11 +20,11 @@ const TextInputExample = ({ route }) => {
   const NumPasaporte = useContext(UserContext)
 
   const [texto, setTexto] = React.useState('');
-  const [apiResponse, setResponse] = React.useState()
-  const [vuelos, setVuelos] = React.useState('');
+  const [apiResponse, setResponse] = React.useState([])
   const [loading, setLoading] = React.useState(false)
   const [ciudad, setCiudad] = React.useState()
   const [params, setParams] = React.useState()
+  const [topic, setTopic] = React.useState()
 
   const substr = 'flight';
   const substr2 = 'hotel';
@@ -51,6 +51,7 @@ const TextInputExample = ({ route }) => {
             }
             return respuesta
           }))
+          setTopic("vuelo")
         })
         .finally(() => setLoading(true))
     }
@@ -61,10 +62,12 @@ const TextInputExample = ({ route }) => {
           setResponse(hoteles.map((hotel) => {
             return hotel
           }))
+          setTopic("hotel")
         })
         .finally(() => setLoading(true))
     }
     if (word.includes(substr3.toLowerCase())) {
+      let responses = [];
       params.query.forEach(element => {
         let params2 = {
           access_key: params.access_key,
@@ -79,14 +82,20 @@ const TextInputExample = ({ route }) => {
         })
           .then(response => {
             console.log(response.data)
-            setResponse(response.data)
+            responses.push({respuesta: `Current temperature in ${response.data.location.name} is ${response.data.current.temperature}℃`});
+            setResponse(responses);
           }).catch(error => {
             console.log(error);
           }).finally(() => setLoading(true))
       });
+
+
     }
   }, [texto])
 
+  useEffect(() => {
+    console.log(apiResponse)
+  }, [apiResponse])
   useEffect(() => {
     setParams({
       access_key: '54d5077ef53da456ee3ef72562c9ba19',

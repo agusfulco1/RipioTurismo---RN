@@ -30,7 +30,7 @@ export default function Detalle({route}) {
                 {Detalle.map((obj) => {
                     return (
                         <View key={obj}>
-                            <Text style={styles.textoActividad}>{obj.Hora.substring(11, 16)}:  {obj.Titulo}</Text>
+                            <Text style={styles.textoActividad}><ul><li>{obj.Hora.substring(11, 16)}:  {obj.Titulo}</li></ul></Text>
                         </View>
                     )
                 })}
@@ -49,7 +49,9 @@ const styles = StyleSheet.create({
         width: "50%",
         justifyContent: 'center',
         backgroundColor: '#F9F9F9',
-        padding: 10
+        padding: 10,
+        borderWidth: 2,
+        borderColor: "#3399FF"
     },
     containerTitulo: {
         textAlign: 'center'

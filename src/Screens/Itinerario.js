@@ -59,14 +59,16 @@ const styles = StyleSheet.create({
   Actividad: {
     width: "100%",
     height: "20%",
+    textAlign: 'center'
   },
   texto: {
     fontSize: 45,
   },
   box: {
-    width: "20%"
+    width: "20%",
   },
   containerActividad: {
     flexDirection: 'row',
+    textAlign: 'center'
   }
 });

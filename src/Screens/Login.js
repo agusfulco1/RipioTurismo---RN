@@ -47,7 +47,7 @@ export default function Login(props) {
       <View style={styles.container}>
         <Input nombreLabel="N° Pasaporte" text={textName} setText={onChangeTextName}></Input>
         <Input nombreLabel="Contraseña" text={textNumber} setText={onChangeTextNumber}></Input>
-        { isLoading ? null : !validation ? <Text style={styles.texto}><MaterialCommunityIcons name="alert" size={24} color="red" />Error, el nombre o el numero de pasaporte no coinciden.</Text> : null}
+        { isLoading ? null : !validation ? <View style={styles.containerError}><Text style={styles.texto}><MaterialCommunityIcons name="alert" size={24} color="red" />Error, el nombre o el numero de pasaporte no coinciden.</Text></View> : null}
         <Button
           style={styles.boton}
           title='Iniciar Sesion'
@@ -68,8 +68,16 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
     texto: {
-      marginTop: 60,
+      
       color: '#F72323',
-      marginBottom: -30
+      fontSize: 20,
+      
     },
+    containerError: {
+      marginTop: 60,
+      
+      width: "100%",
+      marginBottom: -30,
+      textAlign: 'center'
+    }
   });

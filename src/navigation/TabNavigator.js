@@ -3,10 +3,12 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Itinerario from "../Screens/Itinerario"
 import Bot from "../Screens/Bot";
 import { UserContext } from '../Context/UserContext'
+import Login from '../Screens/Login'
 const Tab = createBottomTabNavigator()
 
 const homeName = "Home";
 const chatName = "Chat";
+const logOut = "Log Out"
 export default function TabNavigator({ route }) {
     const { NumPasaporte } = route.params
     return (
@@ -23,6 +25,8 @@ export default function TabNavigator({ route }) {
                         } else if (rn === chatName) {
                             iconName = focused ? 'chatbox' : 'chatbox-outline';
 
+                        } else if (rn === logOut) {
+                            iconName = focused ? 'person-circle' : 'person-circle-outline'
                         }
                         // You can return any component that you like here!
                         return <Ionicons name={iconName} size={size} color={color} />;
@@ -37,6 +41,7 @@ export default function TabNavigator({ route }) {
                 }}>
                 <Tab.Screen name={homeName} component={Itinerario} />
                 <Tab.Screen name={chatName} component={Bot} />
+                <Tab.Screen name={logOut} component={Login}></Tab.Screen>
             </Tab.Navigator>
         </UserContext.Provider>
 

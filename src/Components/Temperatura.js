@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native';
 
-export default function Vuelo(vuelo) {
+export default function Vuelo(temperatura) {
     return (
         <View>
             {vuelo.vuelo.map((obj) => {

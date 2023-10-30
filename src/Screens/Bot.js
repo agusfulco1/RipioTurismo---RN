@@ -10,7 +10,7 @@ import { UserContext } from '../Context/UserContext';
 import { Dimensions } from 'react-native';
 import react from 'react';
 import Vuelo from '../Components/Vuelo'
-//import Hotel from '../Components/Hotel'
+import Hotel from '../Components/Hotel'
 //import Temperatura from '../Components/Temperatura'
 
 const windowWidth = Dimensions.get('window').width;
@@ -44,6 +44,7 @@ const TextInputExample = ({ route }) => {
 
   React.useEffect(() => {
     setLoading(false)
+    setTopic("")
     let word = texto.toLowerCase();
     if (word.includes(substr.toLowerCase())) {
       axios.get("http://localhost:3000/vuelos/" + NumPasaporte)
@@ -79,12 +80,7 @@ const TextInputExample = ({ route }) => {
           query: element.Nombre
         }
         console.log('http://api.weatherstack.com/current', { params2 })
-        axios.get('http://api.weatherstack.com/current', {
-          params: {
-            access_key: params.access_key,
-            query: element.Nombre
-          }
-        })
+        axios.get('http://localhost:3000/temperature')
           .then(response => {
             console.log(response.data)
             responses.push(`Current temperature in ${response.data.location.name} is ${response.data.current.temperature}℃`);

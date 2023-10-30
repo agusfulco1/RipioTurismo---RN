@@ -1,17 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import Input from "../Components/Input.js"
 import { Dimensions } from 'react-native';
 import axios from 'axios';
 import Button from "../Components/Button.js"
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
-export const UserContext = React.createContext();
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-import {
-  useFonts,
-  Fredoka_300Light,
-} from "@expo-google-fonts/fredoka";
+import { UserContext } from '../Context/UserContext';
 
 export default function Login(props) {
     const [textNumber, onChangeTextNumber] = React.useState('');
@@ -19,6 +15,14 @@ export default function Login(props) {
     const [textName, onChangeTextName] = React.useState('');
     const [NumPasaporte, setNumPasaporte] = React.useState("")
     const [isLoading, setLoading] = React.useState(true)
+
+    const NumPasaporteContext = useContext(UserContext)
+
+    /*useEffect(() => {
+      if (NumPasaporteContext !== "") {
+        NumPasaporteContext = ""
+      }
+    })*/
     const onPress = () => {
       setLoading(true)
       setValidation(false);

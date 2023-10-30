@@ -3,8 +3,9 @@ import { View, StyleSheet, TextInput, Text, ScrollView } from 'react-native';
 import axios from 'axios';
 import {
   useFonts,
-  Montserrat_300Light
-} from "@expo-google-fonts/montserrat"
+  Fredoka_400Regular,
+  Fredoka_500Medium,
+} from "@expo-google-fonts/fredoka";
 import { UserContext } from '../Context/UserContext';
 import { Dimensions } from 'react-native';
 import react from 'react';
@@ -17,7 +18,8 @@ const windowHeight = Dimensions.get('window').height;
 
 const TextInputExample = ({ route }) => {
   let [fontsLoaded] = useFonts({
-    Montserrat_300Light,
+    Fredoka_400Regular,
+    Fredoka_500Medium,
   })
 
   const NumPasaporte = useContext(UserContext)
@@ -147,16 +149,18 @@ const styles = StyleSheet.create({
     marginTop: 50,
     borderRadius: 13,
     alignItems: 'center',
-  }, text: {
+  },
+  text: {
     height: 40,
     padding: 10,
     color: 'black',
+    fontFamily: "Fredoka_400Regular",
   },
   text2: {
     fontSize: 40,
     fontWeight: 'bold',
     color: 'black',
-    fontFamily: "Montserrat_300Light"
+    fontFamily: "Fredoka_500Medium"
   },
   box: {
     padding: 10,

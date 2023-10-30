@@ -8,6 +8,10 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 export const UserContext = React.createContext();
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
+import {
+  useFonts,
+  Fredoka_300Light,
+} from "@expo-google-fonts/fredoka";
 
 export default function Login(props) {
     const [textNumber, onChangeTextNumber] = React.useState('');
@@ -71,6 +75,7 @@ const styles = StyleSheet.create({
       
       color: '#F72323',
       fontSize: 20,
+      fontFamily: "Fredoka_300Light",
       
     },
     containerError: {

@@ -4,6 +4,12 @@ import axios from 'axios';
 import Separator from '../Components/Separator'
 import { Dimensions } from 'react-native';
 import { UserContext } from '../Context/UserContext';
+import {
+  useFonts,
+  Fredoka_400Regular,
+  Fredoka_500Medium,
+  
+} from "@expo-google-fonts/fredoka";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -13,6 +19,11 @@ export default function Itinerario({ navigation }) {
   const [loading, setLoading] = React.useState(false)
   
   const NumPasaporte = useContext(UserContext)
+
+  let [fontsLoaded] = useFonts({
+    Fredoka_500Medium,
+    Fredoka_400Regular
+  });
 
   React.useEffect(() => {
     axios.get('http://localhost:3000/activities/' + NumPasaporte)
@@ -26,6 +37,8 @@ export default function Itinerario({ navigation }) {
     <View style={styles.container}>
       {!loading ? (
         <Text>Loading...</Text>
+      ) : !fontsLoaded ? (
+        <Text>Loading...</Text>
       ) : (
         actividades.map((obj) => {
           return (
@@ -33,8 +46,8 @@ export default function Itinerario({ navigation }) {
               <TouchableOpacity style={styles.Actividad} onPress={() => { navigation.navigate('detalle', { Actividad: obj }) }}>
                 <View style={styles.containerActividad} >
                   <View style={styles.box}>
-                    <Text>{obj.Nombre}</Text>
-                    <Text>{obj.Descripcion}</Text>
+                    <Text style={styles.descripcion}>{obj.Nombre}</Text>
+                    <Text style={styles.descripcion}>{obj.Descripcion}</Text>
                   </View>
                   <Text style={styles.texto}> Dia {obj.Duracion}</Text>
                 </View>
@@ -63,6 +76,7 @@ const styles = StyleSheet.create({
   },
   texto: {
     fontSize: 45,
+    fontFamily: "Fredoka_500Medium",
   },
   box: {
     width: "20%",
@@ -70,5 +84,9 @@ const styles = StyleSheet.create({
   containerActividad: {
     flexDirection: 'row',
     textAlign: 'center'
+  },
+  descripcion: {
+    fontFamily: "Fredoka_400Regular",
+    fontSize: 12,
   }
 });

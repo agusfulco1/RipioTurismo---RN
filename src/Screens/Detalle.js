@@ -4,6 +4,11 @@ import { Dimensions } from 'react-native';
 import axios from 'axios';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
+import {
+    useFonts,
+    Fredoka_400Regular,
+    Fredoka_500Medium
+  } from "@expo-google-fonts/fredoka";
 
 export default function Detalle({route}) {
     const {Actividad} = route.params
@@ -57,6 +62,10 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     titulo: {
-        fontSize: 30
+        fontSize: 30,
+        fontFamily: "Fredoka_500Medium",
+    },
+    textoActividad:{
+        fontFamily: "Fredoka_400Regular"
     }
 })

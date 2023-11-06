@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   },
   Actividad: {
     width: "100%",
-    height: "100%",
+    height: "20%",
     textAlign: 'center'
   },
   texto: {
@@ -90,7 +90,4 @@ const styles = StyleSheet.create({
     fontFamily: "Fredoka_400Regular",
     fontSize: 14,
   },
-  boxActividad: {
-    height: '20%',
-  }
 });

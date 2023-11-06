@@ -6,7 +6,7 @@ export default function Vuelo(hotel) {
         <View>
             {hotel.hotel.map((obj) => {
                 return (
-                    <View id={obj.id}>
+                    <View id={obj.idHotel}>
                         <Text>Nombre: {obj.Nombre}</Text>
                         <Text>Ubicacion: {obj.Ubicacion}</Text>
                         <Text>Rating: {obj.Rating}</Text>

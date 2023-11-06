@@ -11,7 +11,7 @@ import { Dimensions } from 'react-native';
 import react from 'react';
 import Vuelo from '../Components/Vuelo'
 import Hotel from '../Components/Hotel'
-//import Temperatura from '../Components/Temperatura'
+import Temperatura from '../Components/Temperatura'
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -74,34 +74,23 @@ const TextInputExample = ({ route }) => {
     }
     if (word.includes(substr3.toLowerCase())) {
       let responses = [];
-      params.query.forEach(element => {
-        let params2 = {
-          access_key: params.access_key,
-          query: element.Nombre
-        }
-        console.log('http://api.weatherstack.com/current', { params2 })
-        axios.get('http://localhost:3000/temperature')
+      ciudad.forEach(element => {
+        console.log(element)
+        axios.get('http://localhost:3000/temperature/' + element.Nombre)
           .then(response => {
-            console.log(response.data)
-            responses.push(`Current temperature in ${response.data.location.name} is ${response.data.current.temperature}℃`);
-            setResponse(responses);
-            setTopic("temperatura")
+            responses.push(response.data);
           }).catch(error => {
             console.log(error);
           }).finally(() => setLoading(true))
       });
+      setResponse(responses);
+      setTopic("temperatura")
     }
   }, [texto])
 
   useEffect(() => {
     console.log(apiResponse)
   }, [apiResponse])
-  useEffect(() => {
-    setParams({
-      access_key: '54d5077ef53da456ee3ef72562c9ba19',
-      query: ciudad
-    })
-  }, [ciudad])
 
   return (
       <View style={styles.container}>

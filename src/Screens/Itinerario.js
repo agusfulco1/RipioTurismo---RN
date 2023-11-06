@@ -42,7 +42,7 @@ export default function Itinerario({ navigation }) {
       ) : (
         actividades.map((obj) => {
           return (
-            <View key={obj.idActividad}>
+            <View key={obj.idActividad} style={styles.boxActividad}>
               <TouchableOpacity style={styles.Actividad} onPress={() => { navigation.navigate('detalle', { Actividad: obj }) }}>
                 <View style={styles.containerActividad} >
                   <View style={styles.box}>
@@ -52,7 +52,6 @@ export default function Itinerario({ navigation }) {
                   <Text style={styles.texto}> Dia {obj.Duracion}</Text>
                 </View>
                 <Separator></Separator>
-
               </TouchableOpacity>
             </View>
           );
@@ -71,7 +70,7 @@ const styles = StyleSheet.create({
   },
   Actividad: {
     width: "100%",
-    height: "20%",
+    height: "100%",
     textAlign: 'center'
   },
   texto: {
@@ -79,14 +78,19 @@ const styles = StyleSheet.create({
     fontFamily: "Fredoka_500Medium",
   },
   box: {
-    width: "20%",
+    width: "40%",
   },
   containerActividad: {
     flexDirection: 'row',
-    textAlign: 'center'
+    textAlign: 'start',
+    justifyContent: 'space-between',
+    width: '97%',
   },
   descripcion: {
     fontFamily: "Fredoka_400Regular",
-    fontSize: 12,
+    fontSize: 14,
+  },
+  boxActividad: {
+    height: '20%',
   }
 });

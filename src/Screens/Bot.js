@@ -25,7 +25,7 @@ const TextInputExample = ({ route }) => {
   const NumPasaporte = useContext(UserContext)
 
   const [texto, setTexto] = React.useState('');
-  const [apiResponse, setResponse] = React.useState()
+  const [apiResponse, setResponse] = React.useState([])
   const [loading, setLoading] = React.useState(false)
   const [ciudad, setCiudad] = React.useState()
   const [params, setParams] = React.useState()

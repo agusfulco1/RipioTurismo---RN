@@ -1,19 +1,24 @@
 import { View, Text } from 'react-native';
 
 export default function Vuelo(temperatura) {
-    temperatura.temperatura.forEach(element => {
-        console.log("hola")
-    });
+    console.log(temperatura)
+    
+    const t = temperatura.temperatura
+    console.log(temperatura.temperatura.length)
+
+
+    console.log(t)
     return (
         <View>
-            {temperatura.temperatura.map((obj) => {
 
-                console.log(`Current temperature in ${obj.location.name} is ${obj.current.temperature}℃`)
+
+            {/* {temperatura.map(t => t.map(obj => {
                 console.log(obj)
+                console.log(obj.lenght)
                 return (
-                    <Text id={obj.id}>{obj}</Text>
+                    <Text id={obj.id}>{`Current temperature in ${obj.location.name} is ${obj.current.temperature}℃`}</Text>
                 )
-            })}
+            }))} */}
         </View>
     )
 }

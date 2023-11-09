@@ -73,17 +73,16 @@ const TextInputExample = ({ route }) => {
         .finally(() => setLoading(true))
     }
     if (word.includes(substr3.toLowerCase())) {
-      let responses = [];
+      setResponse([]);
       ciudad.forEach(element => {
-        console.log(element)
         axios.get('http://localhost:3000/temperature/' + element.Nombre)
           .then(response => {
-            responses.push(response.data);
+            setResponse(r => [...r, response.data]);
+
           }).catch(error => {
             console.log(error);
           }).finally(() => setLoading(true))
       });
-      setResponse(responses);
       setTopic("temperatura")
     }
   }, [texto])

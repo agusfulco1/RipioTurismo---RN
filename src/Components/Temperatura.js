@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native';
 
-export default function Vuelo(temperatura) {
+export default function Temperatura(temperatura) {
     console.log(temperatura)
     
     const t = temperatura.temperatura
@@ -11,14 +11,11 @@ export default function Vuelo(temperatura) {
     return (
         <View>
 
-
-            {/* {temperatura.map(t => t.map(obj => {
-                console.log(obj)
-                console.log(obj.lenght)
+            {temperatura.temperatura.map(obj => {
                 return (
                     <Text id={obj.id}>{`Current temperature in ${obj.location.name} is ${obj.current.temperature}℃`}</Text>
                 )
-            }))} */}
+            })}
         </View>
     )
 }

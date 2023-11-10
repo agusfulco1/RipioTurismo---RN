@@ -19,20 +19,22 @@ export default function Itinerario({ navigation }) {
   const [loading, setLoading] = React.useState(false)
   
   const NumPasaporte = useContext(UserContext)
-  console.log(NumPasaporte)
+
   let [fontsLoaded] = useFonts({
     Fredoka_500Medium,
     Fredoka_400Regular
   });
 
   React.useEffect(() => {
-    axios.get('http://localhost:3000/activities/' + NumPasaporte)
+    console.log(NumPasaporte)
+    console.log(NumPasaporte.pasaporte)
+    axios.get('http://localhost:3000/activities/' + NumPasaporte.pasaporte)
       .then(function (response) {
         setActividades(response.data)
         console.log(response.data)
       })
       .finally(() => setLoading(true))
-  }, [])
+  }, [NumPasaporte])
   return (
     <View style={styles.container}>
       {!loading ? (

@@ -8,7 +8,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 import { UserContext } from '../Context/UserContext';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function Login(props) {
     const [textNumber, onChangeTextNumber] = React.useState('');
     const [validation, setValidation] = React.useState();
@@ -16,13 +16,18 @@ export default function Login(props) {
     const [NumPasaporte, setNumPasaporte] = React.useState("")
     const [isLoading, setLoading] = React.useState(true)
 
-    const NumPasaporteContext = useContext(UserContext)
-    console.log(NumPasaporteContext)
-    /*useEffect(() => {
-      if (NumPasaporteContext !== "") {
-        NumPasaporteContext = ""
+    
+    useEffect( () => {
+      const NumPasaporteContext = useContext(UserContext)
+      const verificarLogin = async () => {
+        const lcNumPasaporte= await AsyncStorage.getItem('NumPasaporte')
+        if (lcNumPasaporte !== undefined) {
+          const stored = await AsyncStorage.getItem('NumPasaporte')
+          NumPasaporteContext.setPasaporte(stored)
+        } 
       }
-    })*/
+      verificarLogin()
+    }, [])
     const onPress = () => {
       setLoading(true)
       setValidation(false);

@@ -4,7 +4,9 @@ import Itinerario from "../Screens/Itinerario"
 import Bot from "../Screens/Bot";
 import { UserContext } from '../Context/UserContext'
 import Login from '../Screens/Login'
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import LogOut from "./LogOut";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const Tab = createBottomTabNavigator()
 
 const homeName = "Home";
@@ -13,9 +15,18 @@ const logOut = "Log Out"
 export default function TabNavigator({ route }) {
     const [pasaporte, setPasaporte] = useState()
     const { NumPasaporte } = route.params
-    setPasaporte(NumPasaporte)
+    useEffect( () => {
+        const crearContext = async () => {
+            console.log(NumPasaporte)
+            setPasaporte(NumPasaporte)
+            await AsyncStorage.setItem("NumPasaporte", NumPasaporte)
+        }
+        crearContext()
+    }, [])
+    
     return (
-        <UserContext.Provider value={NumPasaporte /*{pasaporte, setPasaporte }*/}>
+        
+        <UserContext.Provider value={{pasaporte, setPasaporte }}>
             <Tab.Navigator
                 screenOptions={({ route }) => ({
                     tabBarIcon: ({ focused, color, size }) => {
@@ -44,7 +55,7 @@ export default function TabNavigator({ route }) {
                 }}>
                 <Tab.Screen name={homeName} component={Itinerario} />
                 <Tab.Screen name={chatName} component={Bot} />
-                <Tab.Screen name={logOut} component={Login}></Tab.Screen>
+                <Tab.Screen name={logOut} component={LogOut}></Tab.Screen>
             </Tab.Navigator>
         </UserContext.Provider>
 

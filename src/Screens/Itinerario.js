@@ -19,7 +19,7 @@ export default function Itinerario({ navigation }) {
   const [loading, setLoading] = React.useState(false)
   
   const NumPasaporte = useContext(UserContext)
-
+  console.log(NumPasaporte)
   let [fontsLoaded] = useFonts({
     Fredoka_500Medium,
     Fredoka_400Regular

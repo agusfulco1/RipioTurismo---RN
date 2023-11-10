@@ -4,15 +4,18 @@ import Itinerario from "../Screens/Itinerario"
 import Bot from "../Screens/Bot";
 import { UserContext } from '../Context/UserContext'
 import Login from '../Screens/Login'
+import { useState } from "react";
 const Tab = createBottomTabNavigator()
 
 const homeName = "Home";
 const chatName = "Chat";
 const logOut = "Log Out"
 export default function TabNavigator({ route }) {
+    const [pasaporte, setPasaporte] = useState()
     const { NumPasaporte } = route.params
+    setPasaporte(NumPasaporte)
     return (
-        <UserContext.Provider value={NumPasaporte}>
+        <UserContext.Provider value={NumPasaporte /*{pasaporte, setPasaporte }*/}>
             <Tab.Navigator
                 screenOptions={({ route }) => ({
                     tabBarIcon: ({ focused, color, size }) => {

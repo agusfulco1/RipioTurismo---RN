@@ -17,7 +17,7 @@ export default function Login(props) {
     const [isLoading, setLoading] = React.useState(true)
 
     const NumPasaporteContext = useContext(UserContext)
-
+    console.log(NumPasaporteContext)
     /*useEffect(() => {
       if (NumPasaporteContext !== "") {
         NumPasaporteContext = ""

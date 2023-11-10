@@ -16,18 +16,18 @@ export default function Login(props) {
     const [NumPasaporte, setNumPasaporte] = React.useState("")
     const [isLoading, setLoading] = React.useState(true)
 
-    
+    const NumPasaporteContext = useContext(UserContext)
     useEffect( () => {
-      const NumPasaporteContext = useContext(UserContext)
       const verificarLogin = async () => {
         const lcNumPasaporte= await AsyncStorage.getItem('NumPasaporte')
-        if (lcNumPasaporte !== undefined) {
-          const stored = await AsyncStorage.getItem('NumPasaporte')
-          NumPasaporteContext.setPasaporte(stored)
+        if (lcNumPasaporte !== null) {
+          NumPasaporteContext.setPasaporte(lcNumPasaporte)
+          props.navigation.navigate('mose', {NumPasaporte: lcNumPasaporte})
         } 
       }
       verificarLogin()
     }, [])
+
     const onPress = () => {
       setLoading(true)
       setValidation(false);

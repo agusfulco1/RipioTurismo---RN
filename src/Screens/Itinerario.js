@@ -44,7 +44,7 @@ export default function Itinerario({ navigation }) {
       ) : (
         actividades.map((obj) => {
           return (
-            <View key={obj.idActividad} style={styles.boxActividad}>
+            <View key={obj.idActividad}>
               <TouchableOpacity style={styles.Actividad} onPress={() => { navigation.navigate('detalle', { Actividad: obj }) }}>
                 <View style={styles.containerActividad} >
                   <View style={styles.box}>

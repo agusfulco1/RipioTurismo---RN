@@ -36,7 +36,7 @@ const TextInputExample = ({ route }) => {
   const substr3 = 'temperature';
 
   useEffect(() => {
-    axios.get('http://localhost:3000/ciudad/' + NumPasaporte)
+    axios.get('http://localhost:3000/ciudad/' + NumPasaporte.pasaporte)
       .then(response => {
         setCiudad(response.data)
       })
@@ -47,7 +47,7 @@ const TextInputExample = ({ route }) => {
     setTopic("")
     let word = texto.toLowerCase();
     if (word.includes(substr.toLowerCase())) {
-      axios.get("http://localhost:3000/vuelos/" + NumPasaporte)
+      axios.get("http://localhost:3000/vuelos/" + NumPasaporte.pasaporte)
         .then(function (response) {
           const vuelos = response.data
           setResponse(vuelos.map((vuelo) => {
@@ -62,7 +62,7 @@ const TextInputExample = ({ route }) => {
         .finally(() => setLoading(true))
     }
     if (word.includes(substr2.toLowerCase())) {
-      axios.get("http://localhost:3000/hotels/" + NumPasaporte)
+      axios.get("http://localhost:3000/hotels/" + NumPasaporte.pasaporte)
         .then(function (response) {
           const hoteles = response.data
           setResponse(hoteles.map((hotel) => {

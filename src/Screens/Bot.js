@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { View, StyleSheet, TextInput, Text, ScrollView } from 'react-native';
+import { View, StyleSheet, TextInput, Text } from 'react-native';
 import axios from 'axios';
 import {
   useFonts,
@@ -8,7 +8,6 @@ import {
 } from "@expo-google-fonts/fredoka";
 import { UserContext } from '../Context/UserContext';
 import { Dimensions } from 'react-native';
-import react from 'react';
 import Vuelo from '../Components/Vuelo'
 import Hotel from '../Components/Hotel'
 import Temperatura from '../Components/Temperatura'

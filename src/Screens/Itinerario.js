@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   },
   Actividad: {
     width: "100%",
-    height: "20%",
+    height: "100%",
     textAlign: 'center'
   },
   texto: {
@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
   },
   containerActividad: {
     flexDirection: 'row',
+    alignItems: 'center',
     textAlign: 'start',
     justifyContent: 'space-between',
     width: '97%',

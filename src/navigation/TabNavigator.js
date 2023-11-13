@@ -7,11 +7,13 @@ import Login from '../Screens/Login'
 import { useEffect, useState, useContext } from "react";
 import LogOut from "./LogOut";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Catalogo from "../Screens/Catalogo";
 const Tab = createBottomTabNavigator()
 
 const homeName = "Home";
 const chatName = "Chat";
 const logOut = "Log Out"
+const catalogoName = "Catalogo"
 export default function TabNavigator({ route }) {
     const NumPasaporteContext = useContext(UserContext)
     
@@ -40,6 +42,8 @@ export default function TabNavigator({ route }) {
 
                         } else if (rn === logOut) {
                             iconName = focused ? 'person-circle' : 'person-circle-outline'
+                        } else if (rn === catalogoName) {
+                            iconName = focused ? 'basket' : 'basket-outline'
                         }
                         // You can return any component that you like here!
                         return <Ionicons name={iconName} size={size} color={color} />;
@@ -54,6 +58,7 @@ export default function TabNavigator({ route }) {
                 }}>
                 <Tab.Screen name={homeName} component={Itinerario} />
                 <Tab.Screen name={chatName} component={Bot} />
+                <Tab.Screen name={catalogoName} component={Catalogo}></Tab.Screen>
                 <Tab.Screen name={logOut} component={LogOut}></Tab.Screen>
             </Tab.Navigator>
         

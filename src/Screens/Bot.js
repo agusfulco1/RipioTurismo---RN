@@ -52,7 +52,8 @@ const TextInputExample = ({ route }) => {
           setResponse(vuelos.map((vuelo) => {
             const respuesta = {
               codigoVuelo: vuelo.codigoVuelo,
-              aerolinea: vuelo.aerolinea
+              aerolinea: vuelo.aerolinea,
+              fecha: vuelo.Fecha
             }
             return respuesta
           }))

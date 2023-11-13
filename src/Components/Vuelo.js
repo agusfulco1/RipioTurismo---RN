@@ -10,6 +10,7 @@ export default function Vuelo(vuelo) {
                     <View key={obj.codigoVuelo}>
                         <Text>Codigo del vuelo: {obj.codigoVuelo}</Text>
                         <Text>Aerolinea: {obj.aerolinea}</Text>
+                        <Text>Fecha: {obj.fecha}</Text>
                     </View>
                 )
             })}

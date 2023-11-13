@@ -3,6 +3,11 @@ import { View, Text, TouchableOpacity, Button, StyleSheet, TextInput } from "rea
 import { useEffect, useState } from "react";
 import Modal from "react-native-modal";
 import Input from '../Components/Input'
+import { Dimensions } from 'react-native';
+import Separator from "../Components/Separator";
+import { Fredoka_400Regular } from "@expo-google-fonts/fredoka";
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 export default function Viajes({ route }) {
     const [excursiones, setExcursiones] = useState([])
     const [tours, setTours] = useState([])
@@ -22,34 +27,35 @@ export default function Viajes({ route }) {
             })
         axios.get('http://localhost:3000/reseñas/')
     }, [])
-
+    
     const handleModal = () => {
         setIsModalVisible(() => !isModalVisible)
     } 
 
     return (
         <View style={styles.container}>
-            {tours.map((obj) => {
+            {tours.length != 0 ? tours.map((obj) => {
                 return (
                     <View>
                         <TouchableOpacity onPress={handleModal}>
-                            <Text>{obj.Titulo}</Text>
+                            <Text style={styles.textoVacio}>{obj.Titulo}</Text>
                         </TouchableOpacity>
 
                     </View>
                 )
-            })}
-            {excursiones.map((obj) => {
+            }): <Text style={styles.textoVacio}>No hay Tours</Text>}
+            <Separator />
+            {excursiones.length !== 0 ? excursiones.map((obj) => {
                 return (
                     <View>
                         <TouchableOpacity onPress={handleModal}>
-                            <Text>{obj.NombreExcursiones}</Text>
+                            <Text style={styles.textoVacio}>{obj.NombreExcursiones}</Text>
                         </TouchableOpacity>
 
                     </View>
                 )
 
-            })}
+            }): <Text style={styles.textoVacio}>No hay excursiones</Text>}
             <Modal isVisible={isModalVisible}>
                 <View style={styles.modal}>
                     <Text style={styles.textoModal}>Reseñas:</Text>
@@ -71,7 +77,8 @@ export default function Viajes({ route }) {
 
 const styles = StyleSheet.create({
     container: {
-        
+        width: windowWidth,
+        height: windowHeight,
     },
     modal: {
         flex: 1,
@@ -83,5 +90,10 @@ const styles = StyleSheet.create({
     },
     inputReseña: {
         backgroundColor: '#d9d9d9'
+    },
+    textoVacio: {
+        fontSize: 20,
+        marginBottom: 10,
+        fontFamily: "Fredoka_400Regular"
     }
 })

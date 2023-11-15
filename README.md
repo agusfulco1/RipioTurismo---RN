@@ -1,23 +1,17 @@
 # RipioTurismo---RN
 
-### Installation
+### Instalacion
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+Aca les vamos a mostrar como instalar nuestro proyecto
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clona el repositorio
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/agusfulco1/Practica-RN.git
    ```
-3. Install NPM packages in `TP-DAI` and `Parte-RN`
-   ```sh
-   npm install
-   ```
-4. Enter your computers name in `.env`
+2. ubicate en la carpeta `ParteRN` y pon en la terminal
    ```js
-   DB_SERVER = "Computer Name"
+   npm i
    ```
-5. Copy the two files in the folder called `src/BD`
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
